@@ -3,7 +3,7 @@
 class Student < ActiveRecord::Base
     has_many :grades
   
-    validates :name, presence: true
+    validates :Firstname, presence: true
     validates :grade_level, presence: true
     validates :class_name, presence: true
   
