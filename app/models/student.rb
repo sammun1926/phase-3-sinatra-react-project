@@ -2,8 +2,9 @@
 
 class Student < ActiveRecord::Base
     has_many :grades
+    has_many :subjects, through: :grades
   
-    validates :Firstname, presence: true
+    validates :name, presence: true
     validates :grade_level, presence: true
     validates :class_name, presence: true
   

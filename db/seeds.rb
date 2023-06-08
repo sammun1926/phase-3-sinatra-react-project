@@ -1,12 +1,17 @@
-# db/seeds.rb
 require 'faker'
 
-# Generate sample data using Faker gem
+# Generate 10 students
 10.times do
-  subject = Faker::Educator.subject
-  grade = Faker::Number.between(from: 60, to: 100)
-  student_name = Faker::Name.name
+  student = Student.new(
+    name: Faker::Name.name,
+    grade_level: Faker::Number.between(from: 1, to: 12),
+    class_name: Faker::Educator.subject
+  )
+  student.save!
 
-  student = Student.create(name: student_name, grade_level: "10th Grade", class_name: "Mathematics")
-  Grade.create(subject: subject, score: grade, student: student)
+  # Generate grades for the student
+  5.times do
+    subject = Subject.create(name: Faker::Educator.subject)
+    student.grades.create(value: Faker::Number.between(from: 1, to: 100), subject: subject)
+  end
 end
