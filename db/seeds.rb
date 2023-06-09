@@ -1,17 +1,39 @@
+# db/seeds.rb
+
 require 'faker'
 
-# Generate 10 students
+# Create 10 students
 10.times do
-  student = Student.new(
+  Student.create(
     name: Faker::Name.name,
-    grade_level: Faker::Number.between(from: 1, to: 12),
-    class_name: Faker::Educator.subject
+    student_id: Faker::Number.unique.number(digits: 6)
   )
-  student.save!
+end
 
-  # Generate grades for the student
-  5.times do
-    subject = Subject.create(name: Faker::Educator.subject)
-    student.grades.create(value: Faker::Number.between(from: 1, to: 100), subject: subject)
+# Create 5 courses
+5.times do
+  Course.create(
+    name: Faker::Educator.course_name,
+    code: Faker::Lorem.unique.characters(number: 6).upcase
+  )
+end
+
+# Associate students with courses
+Student.all.each do |student|
+  rand(1..3).times do
+    course = Course.all.sample
+    student.courses << course
+    Enrollment.create(student: student, course: course)
+  end
+end
+
+# Generate random grades for students in courses
+Student.all.each do |student|
+  student.courses.each do |course|
+    Grade.create(
+      student: student,
+      course: course,
+      score: rand(50..100)
+    )
   end
 end
