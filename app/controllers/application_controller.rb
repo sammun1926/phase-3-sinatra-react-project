@@ -13,17 +13,15 @@ class ApplicationController < Sinatra::Base
 
   # Create a new student
   post "/students" do
-    student = Student.create(
-      name: params[:name],
-      grade_level: params[:grade_level],
-      class_name: params[:class_name]
-    )
+    student =Student.create(
+        name: params[:name],
+      
+      )
+      
+    
 
-    if student.save
       student.to_json
-    else
-      { error: 'Failed to create student' }.to_json
-    end
+ 
   end
 
   # Get a specific student by ID

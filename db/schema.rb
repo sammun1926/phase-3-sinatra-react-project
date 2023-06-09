@@ -10,29 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_07_171419) do
+ActiveRecord::Schema.define(version: 2023_06_09_100110) do
 
-  create_table "grades", force: :cascade do |t|
-    t.integer "student_id"
-    t.integer "subject_id"
-    t.float "value"
+  create_table "courses", force: :cascade do |t|
+    t.string "name"
+    t.string "course_code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "enrollments", force: :cascade do |t|
+    t.bigint "student_id"
+    t.bigint "course_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_enrollments_on_course_id"
+    t.index ["student_id"], name: "index_enrollments_on_student_id"
   end
 
   create_table "students", force: :cascade do |t|
     t.string "name"
-    t.string "grade_level"
-    t.string "class_name"
+    t.string "student_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "subjects", force: :cascade do |t|
-    t.string "name"
-    t.string "subject_name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
+  add_foreign_key "enrollments", "courses"
+  add_foreign_key "enrollments", "students"
 end
