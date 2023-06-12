@@ -126,13 +126,5 @@ fetch("http://localhost:9292/test")
   your requests.
 
 ## Resources
+https://github.com/sammun1926/student-grade-tracker this is the frontend repo
 
-- [create-react-app][]
-- [dbdiagram.io][]
-- [Postman][postman download]
-
-[create-react-app]: https://create-react-app.dev/docs/getting-started
-[create repo]: https://docs.github.com/en/get-started/quickstart/create-a-repo
-[dbdiagram.io]: https://dbdiagram.io/
-[postman download]: https://www.postman.com/downloads/
-[network tab]: https://developer.chrome.com/docs/devtools/network/
